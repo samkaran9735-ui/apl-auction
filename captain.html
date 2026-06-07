@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Captain Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="hero">
+
+    <h1 id="teamName">🏏 Team Dashboard</h1>
+
+    <h2>APL Auction 2026</h2>
+
+    <div style="background:white;color:black;padding:30px;border-radius:20px;max-width:900px;margin:auto;">
+
+        <h2>Team Information</h2>
+
+        <p><b>Purse Remaining:</b> ₹100 Cr</p>
+
+        <p><b>Players Bought:</b> 0 / 8</p>
+
+        <p><b>Captain:</b> Included</p>
+
+        <hr>
+
+        <h2>Current Auction</h2>
+
+        <div style="padding:20px;border:2px solid #ddd;border-radius:15px;">
+
+            <img
+            src="https://via.placeholder.com/200"
+            width="200"
+            style="border-radius:15px;"
+            >
+
+            <h2>PLAYER NAME</h2>
+
+            <h3>All Rounder</h3>
+
+            <h3>Grade A</h3>
+
+            <h2>Base Price ₹50L</h2>
+
+            <h1>Current Bid ₹50L</h1>
+
+            <h1 id="timer">20</h1>
+
+        </div>
+
+        <br>
+
+        <button onclick="bidPlayer()">
+            💰 BID
+        </button>
+
+        <button onclick="passPlayer()">
+            ❌ PASS
+        </button>
+
+        <br><br>
+
+        <div id="status"></div>
+
+    </div>
+
+</div>
+
+<script>
+
+const params =
+new URLSearchParams(window.location.search);
+
+const team =
+params.get("team");
+
+document.getElementById("teamName")
+.innerHTML =
+"🏏 " + team.toUpperCase();
+
+let currentBid = 50;
+
+function bidPlayer(){
+
+    currentBid += 10;
+
+    document.getElementById("status")
+    .innerHTML =
+    "<h2>Bid Submitted ₹" +
+    currentBid +
+    "L</h2>";
+}
+
+function passPlayer(){
+
+    document.getElementById("status")
+    .innerHTML =
+    "<h2>Player Passed</h2>";
+}
+
+let seconds = 20;
+
+setInterval(()=>{
+
+    if(seconds > 0){
+
+        seconds--;
+
+        document.getElementById("timer")
+        .innerHTML = seconds;
+
+    }
+
+},1000);
+
+</script>
+
+</body>
+</html>
