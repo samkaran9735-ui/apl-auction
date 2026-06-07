@@ -16,32 +16,16 @@
 
         <h3>Create Auction Room</h3>
 
-        <input
-            type="text"
-            id="auctionName"
-            placeholder="Auction Name"
-            style="width:100%;padding:12px;margin-bottom:10px;"
-        >
+        <input type="text" id="auctionName" placeholder="Auction Name"
+        style="width:100%;padding:12px;margin-bottom:10px;">
 
-        <input
-            type="number"
-            id="purse"
-            value="100"
-            style="width:100%;padding:12px;margin-bottom:10px;"
-        >
+        <input type="number" id="purse" value="100"
+        style="width:100%;padding:12px;margin-bottom:10px;">
 
-        <input
-            type="number"
-            id="timer"
-            value="20"
-            style="width:100%;padding:12px;margin-bottom:10px;"
-        >
+        <input type="number" id="timer" value="20"
+        style="width:100%;padding:12px;margin-bottom:10px;">
 
-        <button onclick="createAuction()">
-            CREATE AUCTION
-        </button>
-
-        <br><br>
+        <button onclick="createAuction()">CREATE AUCTION</button>
 
         <div id="result"></div>
 
@@ -49,39 +33,19 @@
 
         <h3>Teams</h3>
 
-        <input
-            type="text"
-            id="team1"
-            value="The Masters"
-            style="width:100%;padding:12px;margin-bottom:10px;"
-        >
+        <input type="text" id="team1" value="The Masters"
+        style="width:100%;padding:12px;margin-bottom:10px;">
 
-        <input
-            type="text"
-            id="team2"
-            value="The Legends"
-            style="width:100%;padding:12px;margin-bottom:10px;"
-        >
+        <input type="text" id="team2" value="The Legends"
+        style="width:100%;padding:12px;margin-bottom:10px;">
 
-        <input
-            type="text"
-            id="team3"
-            value="The Royals"
-            style="width:100%;padding:12px;margin-bottom:10px;"
-        >
+        <input type="text" id="team3" value="The Royals"
+        style="width:100%;padding:12px;margin-bottom:10px;">
 
-        <input
-            type="text"
-            id="team4"
-            value="The Titans"
-            style="width:100%;padding:12px;margin-bottom:10px;"
-        >
+        <input type="text" id="team4" value="The Titans"
+        style="width:100%;padding:12px;margin-bottom:10px;">
 
-        <button onclick="generateLinks()">
-            GENERATE TEAM LINKS
-        </button>
-
-        <br><br>
+        <button onclick="generateLinks()">GENERATE TEAM LINKS</button>
 
         <div id="links"></div>
 
@@ -89,46 +53,28 @@
 
         <h3>🏏 Add Player</h3>
 
-        <input
-            type="text"
-            id="playerName"
-            placeholder="Player Name"
-            style="width:100%;padding:12px;margin-bottom:10px;"
-        >
+        <input type="text" id="playerName" placeholder="Player Name"
+        style="width:100%;padding:12px;margin-bottom:10px;">
 
-        <input
-            type="text"
-            id="playerRole"
-            placeholder="Designation (Batsman / Bowler / All Rounder)"
-            style="width:100%;padding:12px;margin-bottom:10px;"
-        >
+        <input type="text" id="playerRole" placeholder="Role"
+        style="width:100%;padding:12px;margin-bottom:10px;">
 
-        <select
-            id="playerGrade"
-            style="width:100%;padding:12px;margin-bottom:10px;"
-        >
+        <select id="playerGrade"
+        style="width:100%;padding:12px;margin-bottom:10px;">
             <option value="A">Grade A</option>
             <option value="B">Grade B</option>
             <option value="C">Grade C</option>
         </select>
 
-        <input
-            type="text"
-            id="playerPhoto"
-            placeholder="Player Photo URL"
-            style="width:100%;padding:12px;margin-bottom:10px;"
-        >
+        <!-- IMAGE UPLOAD -->
+        <input type="file" id="playerPhoto" accept="image/*"
+        style="width:100%;padding:12px;margin-bottom:10px;">
 
-        <button onclick="addPlayer()">
-            ADD PLAYER
-        </button>
-
-        <br><br>
+        <button onclick="addPlayer()">ADD PLAYER</button>
 
         <div id="playerList"></div>
 
     </div>
-
 </div>
 
 <script>
@@ -138,70 +84,50 @@ let players = [];
 
 function createAuction(){
 
-    currentRoomCode =
-        "APL" +
-        Math.floor(Math.random()*10000);
+    currentRoomCode = "APL" + Math.floor(Math.random()*10000);
 
-    document.getElementById("result").innerHTML = `
-        <h2>✅ Auction Created</h2>
-
-        <p><b>Room Code:</b> ${currentRoomCode}</p>
-
-        <p>Share this Room Code with all captains.</p>
-    `;
+    document.getElementById("result").innerHTML =
+    `<h2>✅ Auction Created</h2>
+    <p><b>Room Code:</b> ${currentRoomCode}</p>`;
 }
 
 function generateLinks(){
 
     if(currentRoomCode === ""){
-        alert("Please create auction first.");
+        alert("Create auction first");
         return;
     }
 
-    const team1 =
-        document.getElementById("team1").value;
-
-    const team2 =
-        document.getElementById("team2").value;
-
-    const team3 =
-        document.getElementById("team3").value;
-
-    const team4 =
-        document.getElementById("team4").value;
-
     document.getElementById("links").innerHTML = `
+    <h3>Captain Links</h3>
 
-        <h3>🏏 Captain Links</h3>
+    The Masters:
+    captain.html?team=masters&room=${currentRoomCode}<br><br>
 
-        <p><b>${team1}</b><br>
-        captain.html?team=masters&room=${currentRoomCode}</p>
+    The Legends:
+    captain.html?team=legends&room=${currentRoomCode}<br><br>
 
-        <p><b>${team2}</b><br>
-        captain.html?team=legends&room=${currentRoomCode}</p>
+    The Royals:
+    captain.html?team=royals&room=${currentRoomCode}<br><br>
 
-        <p><b>${team3}</b><br>
-        captain.html?team=royals&room=${currentRoomCode}</p>
-
-        <p><b>${team4}</b><br>
-        captain.html?team=titans&room=${currentRoomCode}</p>
-
+    The Titans:
+    captain.html?team=titans&room=${currentRoomCode}
     `;
 }
 
 function addPlayer(){
 
-    const name =
-    document.getElementById("playerName").value;
+    let name = document.getElementById("playerName").value;
+    let role = document.getElementById("playerRole").value;
+    let grade = document.getElementById("playerGrade").value;
 
-    const role =
-    document.getElementById("playerRole").value;
+    let file = document.getElementById("playerPhoto").files[0];
 
-    const grade =
-    document.getElementById("playerGrade").value;
+    let photoURL = "";
 
-    const photo =
-    document.getElementById("playerPhoto").value;
+    if(file){
+        photoURL = URL.createObjectURL(file);
+    }
 
     let basePrice = 50;
 
@@ -213,7 +139,7 @@ function addPlayer(){
         role,
         grade,
         basePrice,
-        photo
+        photoURL
     });
 
     renderPlayers();
@@ -227,19 +153,21 @@ function renderPlayers(){
 
     let html = "<h3>Registered Players</h3>";
 
-    players.forEach((player)=>{
+    players.forEach(p => {
 
         html += `
-        <div style="
-            border:1px solid #ddd;
-            padding:15px;
-            margin-bottom:10px;
-            border-radius:10px;
-        ">
-            <b>${player.name}</b><br>
-            ${player.role}<br>
-            Grade ${player.grade}<br>
-            Base Price ₹${player.basePrice}L
+        <div style="border:1px solid #ddd;padding:10px;margin:10px;border-radius:10px;">
+
+            <img src="${p.photoURL}"
+            width="100"
+            height="100"
+            style="border-radius:10px;object-fit:cover;">
+
+            <br><b>${p.name}</b>
+            <br>${p.role}
+            <br>Grade ${p.grade}
+            <br>₹${p.basePrice}L
+
         </div>
         `;
     });
