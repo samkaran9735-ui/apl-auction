@@ -12,7 +12,7 @@
     <h1>👑 HOST DASHBOARD</h1>
     <h2>APL Auction Control Center</h2>
 
-    <div style="background:white;color:black;padding:30px;border-radius:20px;max-width:800px;margin:auto;">
+    <div style="background:white;color:black;padding:30px;border-radius:20px;max-width:900px;margin:auto;">
 
         <h3>Create Auction Room</h3>
 
@@ -85,6 +85,48 @@
 
         <div id="links"></div>
 
+        <hr style="margin:30px 0;">
+
+        <h3>🏏 Add Player</h3>
+
+        <input
+            type="text"
+            id="playerName"
+            placeholder="Player Name"
+            style="width:100%;padding:12px;margin-bottom:10px;"
+        >
+
+        <input
+            type="text"
+            id="playerRole"
+            placeholder="Designation (Batsman / Bowler / All Rounder)"
+            style="width:100%;padding:12px;margin-bottom:10px;"
+        >
+
+        <select
+            id="playerGrade"
+            style="width:100%;padding:12px;margin-bottom:10px;"
+        >
+            <option value="A">Grade A</option>
+            <option value="B">Grade B</option>
+            <option value="C">Grade C</option>
+        </select>
+
+        <input
+            type="text"
+            id="playerPhoto"
+            placeholder="Player Photo URL"
+            style="width:100%;padding:12px;margin-bottom:10px;"
+        >
+
+        <button onclick="addPlayer()">
+            ADD PLAYER
+        </button>
+
+        <br><br>
+
+        <div id="playerList"></div>
+
     </div>
 
 </div>
@@ -92,6 +134,7 @@
 <script>
 
 let currentRoomCode = "";
+let players = [];
 
 function createAuction(){
 
@@ -144,6 +187,64 @@ function generateLinks(){
         captain.html?team=titans&room=${currentRoomCode}</p>
 
     `;
+}
+
+function addPlayer(){
+
+    const name =
+    document.getElementById("playerName").value;
+
+    const role =
+    document.getElementById("playerRole").value;
+
+    const grade =
+    document.getElementById("playerGrade").value;
+
+    const photo =
+    document.getElementById("playerPhoto").value;
+
+    let basePrice = 50;
+
+    if(grade === "B") basePrice = 30;
+    if(grade === "C") basePrice = 20;
+
+    players.push({
+        name,
+        role,
+        grade,
+        basePrice,
+        photo
+    });
+
+    renderPlayers();
+
+    document.getElementById("playerName").value = "";
+    document.getElementById("playerRole").value = "";
+    document.getElementById("playerPhoto").value = "";
+}
+
+function renderPlayers(){
+
+    let html = "<h3>Registered Players</h3>";
+
+    players.forEach((player)=>{
+
+        html += `
+        <div style="
+            border:1px solid #ddd;
+            padding:15px;
+            margin-bottom:10px;
+            border-radius:10px;
+        ">
+            <b>${player.name}</b><br>
+            ${player.role}<br>
+            Grade ${player.grade}<br>
+            Base Price ₹${player.basePrice}L
+        </div>
+        `;
+    });
+
+    document.getElementById("playerList").innerHTML = html;
 }
 
 </script>
