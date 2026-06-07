@@ -1,21 +1,78 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Host Dashboard</title>
+    <title>APL Host Dashboard</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
 <div class="hero">
-    <h1>👑 HOST DASHBOARD</h1>
-    <h2>APL Auction Administration</h2>
 
-    <div class="buttons">
-        <button>Create Auction Room</button>
-        <button>Manage Players</button>
-        <button>View Teams</button>
+    <h1>👑 HOST DASHBOARD</h1>
+    <h2>APL Auction Control Center</h2>
+
+    <div style="background:white;color:black;padding:30px;border-radius:20px;max-width:700px;margin:auto;">
+
+        <h3>Create Auction Room</h3>
+
+        <br>
+
+        <input
+            type="text"
+            id="auctionName"
+            placeholder="Auction Name"
+            style="width:100%;padding:12px;margin-bottom:10px;"
+        >
+
+        <input
+            type="number"
+            id="purse"
+            value="100"
+            style="width:100%;padding:12px;margin-bottom:10px;"
+        >
+
+        <input
+            type="number"
+            id="timer"
+            value="20"
+            style="width:100%;padding:12px;margin-bottom:10px;"
+        >
+
+        <button onclick="createAuction()">
+            CREATE AUCTION
+        </button>
+
+        <br><br>
+
+        <div id="result"></div>
+
     </div>
+
 </div>
+
+<script>
+
+function createAuction(){
+
+    const roomCode =
+        "APL" +
+        Math.floor(
+            Math.random()*10000
+        );
+
+    document.getElementById("result").innerHTML = `
+        <h2>✅ Auction Created</h2>
+
+        <p><b>Room Code:</b> ${roomCode}</p>
+
+        <p>
+        Share this code with all captains.
+        </p>
+    `;
+}
+
+</script>
 
 </body>
 </html>
