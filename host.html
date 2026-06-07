@@ -12,11 +12,9 @@
     <h1>👑 HOST DASHBOARD</h1>
     <h2>APL Auction Control Center</h2>
 
-    <div style="background:white;color:black;padding:30px;border-radius:20px;max-width:700px;margin:auto;">
+    <div style="background:white;color:black;padding:30px;border-radius:20px;max-width:800px;margin:auto;">
 
         <h3>Create Auction Room</h3>
-
-        <br>
 
         <input
             type="text"
@@ -47,28 +45,104 @@
 
         <div id="result"></div>
 
+        <hr style="margin:30px 0;">
+
+        <h3>Teams</h3>
+
+        <input
+            type="text"
+            id="team1"
+            value="The Masters"
+            style="width:100%;padding:12px;margin-bottom:10px;"
+        >
+
+        <input
+            type="text"
+            id="team2"
+            value="The Legends"
+            style="width:100%;padding:12px;margin-bottom:10px;"
+        >
+
+        <input
+            type="text"
+            id="team3"
+            value="The Royals"
+            style="width:100%;padding:12px;margin-bottom:10px;"
+        >
+
+        <input
+            type="text"
+            id="team4"
+            value="The Titans"
+            style="width:100%;padding:12px;margin-bottom:10px;"
+        >
+
+        <button onclick="generateLinks()">
+            GENERATE TEAM LINKS
+        </button>
+
+        <br><br>
+
+        <div id="links"></div>
+
     </div>
 
 </div>
 
 <script>
 
+let currentRoomCode = "";
+
 function createAuction(){
 
-    const roomCode =
+    currentRoomCode =
         "APL" +
-        Math.floor(
-            Math.random()*10000
-        );
+        Math.floor(Math.random()*10000);
 
     document.getElementById("result").innerHTML = `
         <h2>✅ Auction Created</h2>
 
-        <p><b>Room Code:</b> ${roomCode}</p>
+        <p><b>Room Code:</b> ${currentRoomCode}</p>
 
-        <p>
-        Share this code with all captains.
-        </p>
+        <p>Share this Room Code with all captains.</p>
+    `;
+}
+
+function generateLinks(){
+
+    if(currentRoomCode === ""){
+        alert("Please create auction first.");
+        return;
+    }
+
+    const team1 =
+        document.getElementById("team1").value;
+
+    const team2 =
+        document.getElementById("team2").value;
+
+    const team3 =
+        document.getElementById("team3").value;
+
+    const team4 =
+        document.getElementById("team4").value;
+
+    document.getElementById("links").innerHTML = `
+
+        <h3>🏏 Captain Links</h3>
+
+        <p><b>${team1}</b><br>
+        captain.html?team=masters&room=${currentRoomCode}</p>
+
+        <p><b>${team2}</b><br>
+        captain.html?team=legends&room=${currentRoomCode}</p>
+
+        <p><b>${team3}</b><br>
+        captain.html?team=royals&room=${currentRoomCode}</p>
+
+        <p><b>${team4}</b><br>
+        captain.html?team=titans&room=${currentRoomCode}</p>
+
     `;
 }
 
